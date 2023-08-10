@@ -5,13 +5,14 @@ public class Usuario {
     private String nombre;
     private String apellido;
 
-    public Usuario() {
+    private String email;
 
+    public String getEmail() {
+        return email;
     }
 
-    public Usuario(String nombre, String apellido) {
-        this.nombre = nombre;
-        this.apellido = apellido;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getNombre() {
