@@ -11,6 +11,16 @@ public class Usuario {
         return email;
     }
 
+    public Usuario() {
+
+    }
+
+    public Usuario(String nombre, String apellido, String email) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.email = email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
