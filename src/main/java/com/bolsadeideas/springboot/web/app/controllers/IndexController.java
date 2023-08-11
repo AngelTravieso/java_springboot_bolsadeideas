@@ -4,6 +4,7 @@ import com.bolsadeideas.springboot.web.app.models.Usuario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
@@ -45,16 +46,28 @@ public class IndexController {
 
 //        usuarios.add(new Usuario("Angel", "Travieso", "correo@correo.com"));
 
+        /*List<Usuario> usuarios = Arrays.asList(
+                new Usuario("Angel", "Travieso", "correo@correo.com"),
+                new Usuario("Jon", "Doe", "correo2@correo.com"),
+                new Usuario("Maria", "Perez", "correo3@correo.com")
+        );*/
+
+        model.addAttribute("titulo", "Listado de usuarios");
+        // model.addAttribute("usuarios", usuarios);
+
+        return "listar";
+    }
+
+    // ModelAttribute hace que la propiedad este disponible en todo el controlador, a todos los metodos del controlador y se puede usar en las plantilals que se necesiten
+    @ModelAttribute("usuarios") // nombre con el que queremos pasar a la vista
+    public List<Usuario> poblarUsuarios() {
         List<Usuario> usuarios = Arrays.asList(
                 new Usuario("Angel", "Travieso", "correo@correo.com"),
                 new Usuario("Jon", "Doe", "correo2@correo.com"),
                 new Usuario("Maria", "Perez", "correo3@correo.com")
         );
 
-        model.addAttribute("titulo", "Listado de usuarios");
-        model.addAttribute("usuarios", usuarios);
-
-        return "listar";
+        return usuarios;
     }
 
 }
