@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.web.app.controllers;
 
 import com.bolsadeideas.springboot.web.app.models.Usuario;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,16 @@ import java.util.List;
 @RequestMapping("/app") // => ruta de primer nivel, genérica para el controlador
 public class IndexController {
 
+    // @Value() -> busca en el application.properties una propiedad con el nombre dado para usar su valor
+    @Value("${texto.indexcontroller.index.titulo}")
+    private String textoindex;
+
+    @Value("${texto.indexcontroller.perfil.titulo}")
+    private String textoPerfil;
+
+    @Value("${texto.indexcontroller.listar.titulo}")
+    private String textoListar;
+
     // @RequestMapping(value = "/index", method = RequestMethod.GET) // => por defecto es get
     @GetMapping({"/index", "/", "/home", ""}) // => mapeado a varias rutas
     // Model model => model.addAttribute("key", "value");
@@ -22,7 +33,7 @@ public class IndexController {
     // Map<String, Object> map => map.put("key", "value");
     // ModelAndView mv => mv.addObject("key", "value") => return mv;
     public String index(Model model) {
-        model.addAttribute("titulo", "hola spring framework");
+        model.addAttribute("titulo", textoindex);
         return "index";
     }
 
@@ -36,7 +47,7 @@ public class IndexController {
 
         // Pasar datos a la vista
         model.addAttribute("usuario", usuario);
-        model.addAttribute("titulo", "Perfil del usuario: ".concat(usuario.getNombre()));
+        model.addAttribute("titulo", textoPerfil.concat(usuario.getNombre()));
         return "perfil";
     }
 
@@ -52,7 +63,7 @@ public class IndexController {
                 new Usuario("Maria", "Perez", "correo3@correo.com")
         );*/
 
-        model.addAttribute("titulo", "Listado de usuarios");
+        model.addAttribute("titulo", textoListar);
         // model.addAttribute("usuarios", usuarios);
 
         return "listar";
